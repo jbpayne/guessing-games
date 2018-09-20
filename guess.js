@@ -28,7 +28,7 @@ ask = questionText => new Promise((resolve, reject) => {
 
 const start = async () => {
   while (true) {
-    let yesNo = await ask(`Is it... ${guess}? `);
+    let yesNo = (await ask(`Is it... ${guess}? `)).toUpperCase();
     if (yesNo === 'N') {
       if (guessRange[1] - guessRange[0] === 1) {
         console.log(`It is ${guess+1}!`);
@@ -40,7 +40,7 @@ const start = async () => {
         console.log('I guessed it in ' + tries + ' tries.');
         process.exit();
       };
-      let highLow = await ask('Is it higher (H), or lower (L)? ');
+      let highLow = (await ask('Is it higher (H), or lower (L)? ')).toUpperCase();
       if (highLow === 'H') {
         guessRange[0] = guess + 1;
         updateGuess();
