@@ -1,4 +1,14 @@
-let maxRange = +process.argv[2]
+const readline = require('readline');
+const readlineInterface = readline.createInterface(
+  { input: process.stdin, output: process.stdout }
+);
+
+let maxRange;
+if (!process.argv[2]) {
+    maxRange = 100;
+} else {
+  maxRange = +process.argv[2];
+}
 
 let guessRange = [1, maxRange];
 let tries = 0;
@@ -9,11 +19,6 @@ updateGuess = () => {
 };
 
 let guess = updateGuess();
-
-const readline = require('readline');
-const readlineInterface = readline.createInterface(
-  { input: process.stdin, output: process.stdout }
-);
 
 ask = questionText => new Promise((resolve, reject) => {
   readlineInterface.question(questionText, resolve);
