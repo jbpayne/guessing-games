@@ -3,29 +3,36 @@ const readlineInterface = readline.createInterface(
   { input: process.stdin, output: process.stdout }
 );
 
-let maxRange;
+let range = 1;
+let minRange = 1;
+let maxRange = 100;
+let tries = 0;
+let guess = 1;
+
 if (!process.argv[2]) {
     maxRange = 100;
 } else {
   maxRange = +process.argv[2];
 }
 
-let guessRange = [1, maxRange];
-let tries = 0;
-let guess;
+const setRange = () => {
+ range =  maxRange - minRange + 1;
+  console.log("range =", range);
+}
+
 
 const updateGuess = () => {
   tries ++;
-  let range = guessRange[1] - guessRange[0];
-  guess = guessRange[0] + Math.floor(range/2) // Math.round((guessRange[0] + guessRange[1] - 1) / 2);
-  // if (guess === 0) { guess = 1 };
+  setRange;
+  guess = Math.floor((minRange + range) / 2);
+  if (guess === 0) { guess = 1 };
 };
 
 const checkForWin = () => {
   let yesNo;
-  let guessDiff = guessRange[1] - guessRange[0];
-  if (guessDiff <= 1) {
-    console.log(`It is ${guess + guessDiff}!`);
+  setRange;
+  if (range = 0) {
+    console.log(`It is ${guess + range}!`);
     console.log(`I guessed it in ${tries} tries.`);
     process.exit();
   }
@@ -37,16 +44,16 @@ const ask = questionText => new Promise((resolve, reject) => {
 
 const start = async () => {
   while (true) {
-    // checkForWin();
+    checkForWin();
     let yesNo = (await ask(`Is it... ${guess}? `)).toUpperCase();
     if (yesNo === 'N') {
-      // checkForWin();
+      checkForWin();
       let highLow = (await ask('Is it higher (H), or lower (L)? ')).toUpperCase();
       if (highLow === 'H') {
-        guessRange[0] = guess + 1;
+        minRange = guess + 1;
         updateGuess();
       } else if (highLow === 'L') {
-        guessRange[1] = guess - 1;
+        maxRange = guess - 1;
         updateGuess();
       } else {
         console.log('Please enter H/L');
@@ -62,7 +69,7 @@ const start = async () => {
 };
 
 // Start a new game
-console.log(`Please think of a number between 1 and ${guessRange[1]} (inclusive)`);
+console.log(`Please think of a number between 1 and ${maxRange} (inclusive)`);
 console.log(`I will try to guess it.`);
 
 updateGuess();
