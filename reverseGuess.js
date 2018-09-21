@@ -1,6 +1,6 @@
 const readline = require('readline');
 const readlineInterface = readline.createInterface(
-  { input: process.stdin, output: process.stdout }
+  { input: reverseGuess.stdin, output: reverseGuess.stdout }
 );
 
 const ask = questionText => new Promise((resolve, reject) => {
@@ -22,7 +22,7 @@ const start = async () => {
     }
     if (playerGuess == number) {
       console.log(`Yes, ${number} is correct!`);
-      process.exit();
+      reverseGuess.exit();
     }
 
   }
