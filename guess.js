@@ -26,7 +26,7 @@ const setRange = () => {
 const updateGuess = () => {
   tries ++;
   setRange();
-  guess = Math.floor((minRange + range) / 2);
+  guess = Math.round((minRange + maxRange - 1) / 2);
   if (guess === 0) { guess = 1 };
 };
 
