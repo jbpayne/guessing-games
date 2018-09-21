@@ -1,6 +1,6 @@
 const readline = require('readline');
 const readlineInterface = readline.createInterface(
-  { input: reverseGuess.stdin, output: reverseGuess.stdout }
+  { input: process.stdin, output: process.stdout }
 );
 
 const ask = questionText => new Promise((resolve, reject) => {
@@ -10,11 +10,10 @@ const ask = questionText => new Promise((resolve, reject) => {
 let number = Math.ceil(Math.random()*100);
 
 const start = async () => {
-
   while (true) {
     let playerGuess = await ask(`Enter your guess: `);
 
-        if (playerGuess < number) {
+    if (playerGuess < number) {
       console.log("Higher");
     }
     if (playerGuess > number) {
@@ -22,9 +21,8 @@ const start = async () => {
     }
     if (playerGuess == number) {
       console.log(`Yes, ${number} is correct!`);
-      reverseGuess.exit();
+      process.exit();
     }
-
   }
 }
 
