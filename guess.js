@@ -17,21 +17,23 @@ if (!process.argv[2]) {
 
 const setRange = () => {
  range =  maxRange - minRange + 1;
-  console.log("range =", range);
+ console.log("minRange =", minRange);
+ console.log("maxRange =", maxRange);
+ console.log("range =", range);
 }
 
 
 const updateGuess = () => {
   tries ++;
-  setRange;
-  guess = Math.floor((minRange + range) / 2);
+  setRange();
+  guess = Math.round((minRange + maxRange - 1) / 2);
   if (guess === 0) { guess = 1 };
 };
 
 const checkForWin = () => {
   let yesNo;
-  setRange;
-  if (range = 0) {
+  setRange();
+  if (range === 0) {
     console.log(`It is ${guess + range}!`);
     console.log(`I guessed it in ${tries} tries.`);
     process.exit();
