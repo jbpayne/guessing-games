@@ -31,7 +31,7 @@ const checkForWin1 = () => {
   let yesNo;
   setRange();
   if (range === 1) {
-    console.log(`It is ${guess + range}!`);
+    console.log(`It is ${guess}!`);
     console.log(`I guessed it in ${tries} tries.`);
     process.exit();
   }
