@@ -17,9 +17,6 @@ if (!process.argv[2]) {
 
 const setRange = () => {
  range =  maxRange - minRange + 1;
- console.log("minRange =", minRange);
- console.log("maxRange =", maxRange);
- console.log("range =", range);
 }
 
 
@@ -27,14 +24,24 @@ const updateGuess = () => {
   tries ++;
   setRange();
   guess = Math.round((minRange + maxRange - 1) / 2);
-  if (guess === 0) { guess = 1 };
+  if (guess === 1) { guess = 1 };
 };
 
-const checkForWin = () => {
+const checkForWin1 = () => {
   let yesNo;
   setRange();
-  if (range === 0) {
+  if (range === 1) {
     console.log(`It is ${guess + range}!`);
+    console.log(`I guessed it in ${tries} tries.`);
+    process.exit();
+  }
+};
+
+const checkForWin2 = () => {
+  let yesNo;
+  setRange();
+  if (range === 2) {
+    console.log(`It is ${guess + 1}!`);
     console.log(`I guessed it in ${tries} tries.`);
     process.exit();
   }
@@ -46,10 +53,10 @@ const ask = questionText => new Promise((resolve, reject) => {
 
 const start = async () => {
   while (true) {
-    checkForWin();
+    checkForWin1();
     let yesNo = (await ask(`Is it... ${guess}? `)).toUpperCase();
     if (yesNo === 'N') {
-      checkForWin();
+      checkForWin2();
       let highLow = (await ask('Is it higher (H), or lower (L)? ')).toUpperCase();
       if (highLow === 'H') {
         minRange = guess + 1;
