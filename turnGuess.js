@@ -9,6 +9,7 @@ let maxRange = 100;
 let tries = 0;
 let guess = 1;
 
+// Command line arguments
 if (!process.argv[2]) {
     maxRange = 100;
 } else {
@@ -53,7 +54,6 @@ const ask = questionText => new Promise((resolve, reject) => {
 const start = async () => {
   range = 1;
   minRange = 1;
-  maxRange = 100;
   tries = 0;
   guess = 1;
   console.log(`Please think of a number between 1 and ${maxRange} (inclusive)`);

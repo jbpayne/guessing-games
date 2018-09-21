@@ -1,6 +1,6 @@
 const readline = require('readline');
 const readlineInterface = readline.createInterface(
-  { input: reverseGuess.stdin, output: reverseGuess.stdout }
+  { input: process.stdin, output: process.stdout }
 );
 
 let range = 1;
@@ -9,10 +9,10 @@ let maxRange = 100;
 let tries = 0;
 let guess = 1;
 
-if (!reverseGuess.argv[2]) {
+if (!process.argv[2]) {
     maxRange = 100;
 } else {
-  maxRange = +reverseGuess.argv[2];
+  maxRange = +process.argv[2];
 }
 
 const setRange = () => {
@@ -33,7 +33,7 @@ const checkForWin1 = () => {
   if (range === 1) {
     console.log(`It is ${guess}!`);
     console.log(`I guessed it in ${tries} tries.`);
-    reverseGuess.exit();
+    process.exit();
   }
 };
 
@@ -43,7 +43,7 @@ const checkForWin2 = () => {
   if (range === 2) {
     console.log(`It is ${guess + 1}!`);
     console.log(`I guessed it in ${tries} tries.`);
-    reverseGuess.exit();
+    process.exit();
   }
 };
 
@@ -70,7 +70,7 @@ const start = async () => {
     } else if (yesNo === 'Y') {
       console.log(`Your number was ${guess}!`);
       console.log(`I guessed it in ${tries} tries.`);
-      reverseGuess.exit();
+      process.exit();
     } else {
       console.log('Please enter Y/N');
     };
