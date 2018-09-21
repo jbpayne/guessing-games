@@ -36,7 +36,7 @@ const start = async () => {
         process.exit();
       };
       if (guessRange[1] - guessRange[0] === 0) {
-        console.log(`It is ${guess}`);
+        console.log(`There are no numbers left!  It must be ${guess}.`);
         console.log('I guessed it in ' + tries + ' tries.');
         process.exit();
       };
