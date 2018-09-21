@@ -16,11 +16,12 @@ let guess;
 
 const updateGuess = () => {
   tries ++;
-  guess =  Math.round((guessRange[0] + guessRange[1] - 1) / 2);
-  if (guess === 0) { guess = 1 };
+  let range = guessRange[1] - guessRange[0];
+  guess = guessRange[0] + Math.floor(range/2) // Math.round((guessRange[0] + guessRange[1] - 1) / 2);
+  // if (guess === 0) { guess = 1 };
 };
 
-const winCondition = () => {
+const checkForWin = () => {
   let yesNo;
   let guessDiff = guessRange[1] - guessRange[0];
   if (guessDiff <= 1) {
@@ -30,16 +31,16 @@ const winCondition = () => {
   }
 };
 
-ask = questionText => new Promise((resolve, reject) => {
+const ask = questionText => new Promise((resolve, reject) => {
   readlineInterface.question(questionText, resolve);
 });
 
 const start = async () => {
   while (true) {
-    winCondition();
+    // checkForWin();
     let yesNo = (await ask(`Is it... ${guess}? `)).toUpperCase();
     if (yesNo === 'N') {
-      winCondition();
+      // checkForWin();
       let highLow = (await ask('Is it higher (H), or lower (L)? ')).toUpperCase();
       if (highLow === 'H') {
         guessRange[0] = guess + 1;
